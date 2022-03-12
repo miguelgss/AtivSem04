@@ -1,0 +1,48 @@
+﻿@model VendasCliente
+
+@{ 
+    var LimiteId = string.Empty;
+    var Venda = 0;
+}
+<h2>Venda para o Cliente</h2>
+
+<form asp-controller="Home" asp-action="Venda">
+    <div class="row">
+        <div class="col">
+            <label>ID do cliente</label>
+            <input asp-for="LimiteId" class="form-control" value="@LimiteId" />
+        </div>
+
+        <div class="col">
+            <label>Valor da venda</label>
+            <input asp-for="Venda" class="form-control" value="@Venda" />
+        </div>
+    </div>
+
+    <hr />
+</form>
+
+<button class="btn btn-block btn-primary" onclick="RedirecionaVenda()">Vender</button>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td></td>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in (List<Object>)ViewBag.Lista)
+            {
+                <tr>
+                    <td>@item</td>
+                </tr>
+            }
+    </tbody>
+</table>
+
+<script>
+    function RedirecionaVenda() {
+        window.location.href = window.location.origin + "/Home/VendaConcluida/";
+    }
+</script>

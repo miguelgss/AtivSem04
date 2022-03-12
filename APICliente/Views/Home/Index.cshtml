@@ -3,6 +3,36 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Bem-vindo!</h1>
+    <p>Esta é a Atividade da Semana 04 - Criando um Sistema com Acesso a Serviço.</p>
+    <p>Aqui é feito uma comunicação entre um projeto em MVC e uma API.</p>
+    <p>Clique no botão abaixo para testar essa interação!</p>
 </div>
+
+<hr />
+
+<div class="btn btn-block" asp-controller="Home" asp-action="Venda">
+    <a class="btn btn-primary" asp-area="" asp-controller="Home" asp-action="Venda">Vender para um cliente</a>   
+</div>
+
+<hr />
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Valor Venda</td>
+            <td>Data da Venda</td>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in (List<VendasCliente>)ViewBag.Vendas)
+        {
+        <tr>
+            <td>@item.VendaId</td>
+            <td>@item.Venda</td>
+            <td>@item.DataVenda</td>
+        </tr>
+        }
+    </tbody>
+</table>

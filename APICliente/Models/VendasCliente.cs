@@ -1,12 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace APICliente.Models
 {
+    [Table("VendasClientes")]
     public class VendasCliente
     {
+        [Key]
         public int VendaId { get; set; }
 
         public int LimiteId { get; set; }
