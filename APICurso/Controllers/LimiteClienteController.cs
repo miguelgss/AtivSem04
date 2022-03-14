@@ -27,6 +27,12 @@ namespace APICurso.Controllers
             return _context.LimiteClientes.ToList();
         }
 
+        [HttpGet("Cliente/{id}")]
+        public ActionResult<LimiteCliente> GetCliente(int id)
+        {
+            return _context.LimiteClientes.FirstOrDefault(x => x.LimiteId == id);
+        }
+
         // Retorna o Limite de crédito de um cliente específico de acordo com o Id
         [HttpGet("Limite/{id}")]
         public ActionResult<float> Get(int id)

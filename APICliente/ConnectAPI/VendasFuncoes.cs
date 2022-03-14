@@ -16,20 +16,29 @@ namespace APICliente.ConnectAPI
             return ListaLimites;
         }
 
+        public static LimiteCliente GetCliente(string id) // Obtem uma lista com todos os Limite Cliente do banco
+        {
+            LimiteCliente cliente = new LimiteCliente();
+            string json = APICon.RequestGET("Cliente/", id);
+            cliente = JsonConvert.DeserializeObject<LimiteCliente>(json);
+
+            return cliente;
+        }
+
         public static LimiteCliente GetLimite(string id) // Obtem o limite de credito de um cliente especificado pelo Id
         {
             LimiteCliente limite;
-            string json = APICon.RequestGET("/api/LimiteCliente/Limite/", id);
+            string json = APICon.RequestGET("Limite/", id);
             limite = JsonConvert.DeserializeObject<LimiteCliente>(json);
 
             return limite;
         }
 
-        public static void PatchLimite(string id, string valor) // Modifica o limite de credito de um cliente de acordo com o id e valor informado
+        public static void PatchLimite(string id, float valor) // Modifica o limite de credito de um cliente de acordo com o id e valor informado
         {
-            LimiteCliente limite = GetLimite(id);
+            LimiteCliente limite = GetCliente(id);
 
-            string json = APICon.RequestPATCH(@"/api/LimiteCliente/Limite/", id + "/Decrementa/" + valor);
+            string json = APICon.RequestPATCH(@"Limite/", id + "/Decrementa/" + valor);
             limite = JsonConvert.DeserializeObject<LimiteCliente>(json);
         }
     }

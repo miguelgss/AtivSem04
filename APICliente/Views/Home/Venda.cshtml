@@ -1,28 +1,25 @@
-﻿@model LimiteCliente
-
+﻿
 @{ 
     var LimiteId = string.Empty;
     var LimiteCredito = 0;
 }
 <h2>Venda para o Cliente</h2>
 
-<form asp-controller="Home" asp-action="Venda">
+<form method="post" asp-controller="Home" asp-action="Venda">
     <div class="row">
         <div class="col">
             <label>ID do cliente</label>
-            <input asp-for="LimiteId" class="form-control" value="@LimiteId" />
+            <input type="text" class="form-control" name="id" value="@LimiteId" />
         </div>
 
         <div class="col">
             <label>Valor da venda</label>
-            <input asp-for="LimiteCredito" class="form-control" value="@LimiteCredito" />
+            <input type="text" class="form-control" name="valor" value="@LimiteCredito" />
         </div>
     </div>
     <hr />
+    <button type="submit" class="btn btn-block btn-primary">Vender</button>
 </form>
-
-<button class="btn btn-block btn-primary" onclick="RedirecionaVenda()">Vender</button>
-
 <hr />
 <table class="table table-striped table-bordered table-dark">
     <thead>
