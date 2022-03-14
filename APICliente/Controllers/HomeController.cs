@@ -36,17 +36,19 @@ namespace APICliente.Controllers
         public ActionResult<LimiteCliente> Venda(int id, float valor)
         {
             var ListaLimites = VendasFuncoes.GetLista();
+            ViewBag.Lista = ListaLimites;
+
             var Limite = VendasFuncoes.GetCliente(Convert.ToString(id));
 
             if (Limite == null)
             {
-                return NotFound();
+                return NotFound("Cliente não encontrado.");
             }
 
             if (valor > Limite.LimiteCredito)
             {
                 TempData["Message"] = "O limite de crédito do cliente é menor do que o valor da venda.";
-                return BadRequest();
+                return BadRequest(TempData["Message"]);
             }
 
             var Venda = new VendasCliente();
