@@ -10,8 +10,8 @@ namespace APICliente.Context
     public class VendaContext : DbContext
     {
         public VendaContext(DbContextOptions<VendaContext> options) : base(options) { }
-
         public VendaContext() { }
         public DbSet<VendasCliente> VendasCliente { get; set; }
+        public DbSet<LimiteCliente> LimiteClientes { get; set; }
     }
 }

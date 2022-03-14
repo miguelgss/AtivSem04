@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace APICliente.ConnectAPI
 {
-    public class APICon
+    public class APICon // Executa os requests
     {
         public static readonly string URI = "https://localhost:44353/api/limitecliente/";
 

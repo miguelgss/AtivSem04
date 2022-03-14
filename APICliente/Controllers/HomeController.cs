@@ -1,14 +1,13 @@
-﻿using APICliente.Context;
+﻿using APICliente.ConnectAPI;
+using APICliente.Context;
 using APICliente.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
 namespace APICliente.Controllers
 {
-    
+
     public class HomeController : Controller
     {
         private readonly VendaContext _context;
@@ -25,7 +24,6 @@ namespace APICliente.Controllers
             return View();
         }
 
-        [HttpGet]
         public IActionResult Venda()
         {
             var ListaLimites = VendasFuncoes.GetLista();
@@ -33,10 +31,39 @@ namespace APICliente.Controllers
             return View();
         }
 
-        [HttpPatch]
-        public ActionResult<VendasCliente> Venda(int id, int valor)
+        [HttpPost("{id}/{valor}")]
+        public ActionResult<LimiteCliente> Venda(int id, float valor)
         {
+            var ListaLimites = VendasFuncoes.GetLista();
+            var Limite = ListaLimites.FirstOrDefault(x => x.LimiteId == id);
 
+            if (Limite == null)
+            {
+                return NotFound();
+            }
+
+            if (valor > Limite.LimiteCredito)
+            {
+                TempData["Message"] = "O limite de crédito do cliente é menor do que o valor da venda.";
+                return BadRequest();
+            }
+            var Venda = new VendasCliente();
+
+            Venda.LimiteId = id;
+            Venda.Venda = valor;
+            Venda.DataVenda = System.DateTime.Now;
+
+            Limite.LimiteCredito -= valor;
+
+            _context.VendasCliente.Add(Venda);
+            _context.SaveChanges();
+
+            return View();
+        }
+
+        [HttpPatch]
+        public ActionResult<VendasCliente> VendaProcesso()
+        {
             return Ok();
         }
 

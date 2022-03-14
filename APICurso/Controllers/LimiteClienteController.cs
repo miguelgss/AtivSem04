@@ -48,6 +48,15 @@ namespace APICurso.Controllers
         {
             var cliente = _context.LimiteClientes.FirstOrDefault(x => x.LimiteId == id);
 
+            if (cliente == null)
+            {
+                return NotFound();
+            }
+
+            if (cliente.LimiteCredito < valor)
+            {
+                return BadRequest();
+            }
             cliente.LimiteCredito -= valor;
 
             _context.Entry(cliente).State = EntityState.Modified;

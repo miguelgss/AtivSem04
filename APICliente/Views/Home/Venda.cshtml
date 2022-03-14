@@ -1,8 +1,8 @@
-﻿@model VendasCliente
+﻿@model LimiteCliente
 
 @{ 
     var LimiteId = string.Empty;
-    var Venda = 0;
+    var LimiteCredito = 0;
 }
 <h2>Venda para o Cliente</h2>
 
@@ -15,29 +15,33 @@
 
         <div class="col">
             <label>Valor da venda</label>
-            <input asp-for="Venda" class="form-control" value="@Venda" />
+            <input asp-for="LimiteCredito" class="form-control" value="@LimiteCredito" />
         </div>
     </div>
-
     <hr />
 </form>
 
 <button class="btn btn-block btn-primary" onclick="RedirecionaVenda()">Vender</button>
 
-<table class="table table-striped">
+<hr />
+<table class="table table-striped table-bordered table-dark">
     <thead>
         <tr>
-            <td></td>
+            <td>Id</td>
+            <td>Nome</td>
+            <td>Limite credito</td>
         </tr>
     </thead>
 
     <tbody>
-        @foreach (var item in (List<Object>)ViewBag.Lista)
-            {
-                <tr>
-                    <td>@item</td>
-                </tr>
-            }
+        @foreach (var item in (List<LimiteCliente>)ViewBag.Lista)
+        {
+            <tr>
+                <td>@item.LimiteId</td>
+                <td>@item.Nome</td>
+                <td>@item.LimiteCredito</td>
+            </tr>
+        }
     </tbody>
 </table>
 
